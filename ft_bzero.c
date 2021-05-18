@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 22:26:20 by mmassaak          #+#    #+#             */
-/*   Updated: 2021/05/17 21:34:56 by mmassaak         ###   ########.fr       */
+/*   Created: 2021/05/17 21:23:04 by mmassaak          #+#    #+#             */
+/*   Updated: 2021/05/17 21:34:15 by mmassaak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include<stdlib.h>
+void	bzero(void *s, size_t n)
+{
+	int	i;
 
-size_t	ft_strlen(const char *s);
-void	*ft_memset(void *b, int c, size_t len);
-void	bzero(void *s, size_t n);
-
-#endif
+	if (n == 0 || !s)
+		return ;
+	i = 0;
+	while (i < n)
+	{
+		*(char *)(s + i) = 0;
+		i++;
+	}
+}
