@@ -23,10 +23,11 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	rm $(OUT_FILES)
+	rm -f $(OUT_FILES)
 
 fclean:
-	rm $(NAME)
+	rm -f $(NAME)
 
 re:
-	@echo "? xP"
+	rm -f $(OUT_FILES)
+	rm -f $(NAME)
