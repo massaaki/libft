@@ -6,11 +6,11 @@
 #    By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 22:39:04 by mmassaak          #+#    #+#              #
-#    Updated: 2021/05/17 23:41:59 by mmassaak         ###   ########.fr        #
+#    Updated: 2021/05/19 17:05:15 by mmassaak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = ft_strlen.c ft_bzero.c ft_memset.c ft_memcpy.c
+SRC = ft_strlen.c ft_bzero.c ft_memset.c ft_memcpy.c ft_memccpy.c ft_memmove.c
 OUT_FILES = $(SRC:.c=.o)# substitute .c to .o to all SRC
 NAME = libft.a
 FLAGS = -Wall -Werror -Wextra
@@ -23,11 +23,9 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	rm -f $(OUT_FILES)
+	$(RM) $(OUT_FILES)
 
-fclean:
-	rm -f $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
-re:
-	rm -f $(OUT_FILES)
-	rm -f $(NAME)
+re: fclean all

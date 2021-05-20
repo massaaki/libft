@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 22:26:20 by mmassaak          #+#    #+#             */
-/*   Updated: 2021/05/19 17:04:58 by mmassaak         ###   ########.fr       */
+/*   Created: 2021/05/19 17:05:20 by mmassaak          #+#    #+#             */
+/*   Updated: 2021/05/19 22:33:03 by mmassaak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include<stdlib.h>
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	int		i;
+	char	*dst_ptr;
+	char	*src_ptr;
 
-size_t	ft_strlen(const char *s);
-void	*ft_memset(void *b, int c, size_t len);
-void	ft_bzero(void *s, size_t n);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	*ft_memccpy(void *dst, const void *src, int c, size_t n);
-void	*ft_memmove(void *dst, const void *src, size_t len);
-
-#endif
+	dst_ptr = (char *)dst;
+	src_ptr = (char *)src;
+	if (dst_ptr > src_ptr)
+	{
+		i = (int)(len - 1);
+		while (i >= 0)
+		{
+			*(dst_ptr + i) = *(src_ptr + i);
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int)len)
+		{
+			*(dst_ptr + i) = *(src_ptr + i);
+			i++;
+		}
+	}
+	return (dst);
+}
