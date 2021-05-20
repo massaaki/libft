@@ -1,16 +1,5 @@
-/*
- * memcpy copy a block of data from a source to destination address,
- * stopping when character c is found or length == nb
- * 	- Details:
- * 		- typecast to char* (1 byte)
- *		- copy data from src to dst
- *	- Considerations:
- *		- if overlap result is undefined
- *		- if char is found, return next char position + 1
- *		
- */
-
 #include "libft.h"
+
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	size_t	i;
