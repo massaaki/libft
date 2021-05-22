@@ -6,7 +6,7 @@
 /*   By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 22:26:20 by mmassaak          #+#    #+#             */
-/*   Updated: 2021/05/22 11:54:25 by mmassaak         ###   ########.fr       */
+/*   Updated: 2021/05/22 15:08:18 by mmassaak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystrack, const char *needle, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *str);
+int		ft_isalpha(int c);
 
 #endif
