@@ -6,7 +6,7 @@
 #    By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 22:39:04 by mmassaak          #+#    #+#              #
-#    Updated: 2021/05/22 15:45:06 by mmassaak         ###   ########.fr        #
+#    Updated: 2021/05/22 16:59:37 by mmassaak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,15 @@ SRC = ft_strlen.c \
 	  ft_atoi.c \
 	  ft_isalpha.c \
 	  ft_isdigit.c \
-	  ft_isalnum.c
+	  ft_isalnum.c \
+	  ft_isascii.c
 OUT_FILES = $(SRC:.c=.o)# substitute .c to .o to all SRC
 NAME = libft.a
 FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): *.c
 	gcc $(FLAGS) -c $(SRC)
 	ar rc $(NAME) $(OUT_FILES)
 	ranlib $(NAME)
