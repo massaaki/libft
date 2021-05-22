@@ -2,8 +2,8 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int i;
-	char *ptr_s;
+	int		i;
+	char	*ptr_s;
 
 	ptr_s = (char *)s;
 	i = ft_strlen(s);
@@ -13,9 +13,7 @@ char	*ft_strrchr(const char *s, int c)
 			return (ptr_s + i);
 		i--;
 	}
-
-	if(c == '\0')
+	if (c == '\0')
 		return (ptr_s + ft_strlen(s) + 1);
-
 	return (NULL);
 }
