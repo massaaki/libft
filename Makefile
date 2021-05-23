@@ -6,7 +6,7 @@
 #    By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 22:39:04 by mmassaak          #+#    #+#              #
-#    Updated: 2021/05/22 22:08:17 by mmassaak         ###   ########.fr        #
+#    Updated: 2021/05/23 14:49:06 by mmassaak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,3 +52,6 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+test:
+	make m -C ./libft_tests
