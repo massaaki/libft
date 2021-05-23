@@ -15,7 +15,6 @@ char	*ft_substr_allocate(char const *s, unsigned int start, size_t len)
 	return (dest);
 }
 
-
 void	ft_substrcpy(char const *s, unsigned int start, size_t len, char *dest)
 {
 	size_t	i;
@@ -26,9 +25,8 @@ void	ft_substrcpy(char const *s, unsigned int start, size_t len, char *dest)
 	j = 0;
 	str_temp = (char *)s;
 	str_temp += i;
-
 	while (*(str_temp) && (j < len))
-	{	
+	{
 		*(dest + j) = *str_temp;
 		str_temp++;
 		i++;
@@ -51,7 +49,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		*dest = '\0';
 		return (dest);
 	}
-	if ((dest = ft_substr_allocate(s, start, len)) == NULL)
+	dest = ft_substr_allocate(s, start, len);
+	if (dest == NULL)
 		return (NULL);
 	ft_substrcpy(s, start, len, dest);
 	return (dest);
