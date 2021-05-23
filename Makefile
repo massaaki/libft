@@ -6,7 +6,7 @@
 #    By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 22:39:04 by mmassaak          #+#    #+#              #
-#    Updated: 2021/05/22 21:17:49 by mmassaak         ###   ########.fr        #
+#    Updated: 2021/05/22 22:08:17 by mmassaak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC = ft_strlen.c \
 	  ft_isprint.c \
 	  ft_toupper.c \
 	  ft_tolower.c \
-	  ft_calloc.c
+	  ft_calloc.c \
+	  ft_strdup.c
 OUT_FILES = $(SRC:.c=.o)# substitute .c to .o to all SRC
 NAME = libft.a
 FLAGS = -Wall -Werror -Wextra
