@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stdio.h>
 
 /*
  * Function: ft_find_char_in_set
