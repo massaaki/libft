@@ -2,15 +2,10 @@
 #include <stdio.h>
 
 /*
- * Function..: find_char_in_set
- * params..: 
- * 	-char_to_find..: char to verify in set
- * 	-set..: set of chars to verify char_to_find
- * returns..:
- * 	-return (1) if char_to_find is in set
- * 	-return (0) if char_to_find does not in set
+ * Function: ft_find_char_in_set
+ * Description: 
  */
-static int	find_char_in_set(char char_to_find, const char *set)
+static int	ft_find_char_in_set(char char_to_find, const char *set)
 {
 	int	i;
 
@@ -24,39 +19,30 @@ static int	find_char_in_set(char char_to_find, const char *set)
 	return (0);
 }
 
-static void	ft_process_from_left_size(const char *s1, const char *set,
-		int *chars_to_remove, int *last_position_to_remove_from_left)
-{
-	int	i;
-
-	i = 0;
-	*chars_to_remove = 0;
-	*last_position_to_remove_from_left = 0;
-	while (*(s1 + i))
-	{
-		if (find_char_in_set(*(s1 + i), set))
-		{
-			(*chars_to_remove)++;
-			*last_position_to_remove_from_left = i;
-		}
-		else
-			break ;
-		i++;
-	}
-}
-
+/*
+ * Function: ft_get_size_trimmed_str
+ * Description: Find length of chars to remove
+ * Return: string length without chars to remove ('\0' included)
+ */
 static int	ft_get_size_trimmed_str(const char *s1, const char *set)
 {
 	int	i;
 	int	chars_to_remove;
 	int	last_position_to_remove_from_left;
 
-	ft_process_from_left_size(s1, set, &chars_to_remove,
-		&last_position_to_remove_from_left);
+	i = 0;
+	chars_to_remove = 0;
+	last_position_to_remove_from_left = 0;
+	while (*(s1 + i) && (ft_find_char_in_set(*(s1 + i), set)))
+	{
+		(chars_to_remove)++;
+		last_position_to_remove_from_left = i;
+		i++;
+	}
 	i = ft_strlen(s1) - 1;
 	while (i > last_position_to_remove_from_left)
 	{
-		if (find_char_in_set(*(s1 + i), set))
+		if (ft_find_char_in_set(*(s1 + i), set))
 			chars_to_remove++;
 		else
 			break ;
@@ -65,6 +51,12 @@ static int	ft_get_size_trimmed_str(const char *s1, const char *set)
 	return (ft_strlen(s1) - chars_to_remove);
 }
 
+/*
+ * Function: ft_get_trimmed_str_left
+ * Description: Set the FIRST char *dest from left *s1 and update 
+ * last_left_position
+ * Return: void
+ */
 static void	ft_get_trimmed_str_left(char *dest, const char *s1, const char *set,
 		int *last_left_position)
 {
@@ -76,7 +68,7 @@ static void	ft_get_trimmed_str_left(char *dest, const char *s1, const char *set,
 	*last_left_position = 0;
 	while (*(s1 + i))
 	{
-		if (!find_char_in_set(*(s1 + i), set))
+		if (!ft_find_char_in_set(*(s1 + i), set))
 		{
 			*(dest + j) = *(s1 + i);
 			j++;
@@ -87,6 +79,11 @@ static void	ft_get_trimmed_str_left(char *dest, const char *s1, const char *set,
 	}
 }
 
+/*
+ * Function: ft_get_trimmed_str
+ * Description: Set dest without *set in left and right *s1
+ * return void
+ */
 static void	ft_get_trimmed_str(char *dest, const char *s1,
 		const char *set, int size)
 {
@@ -101,7 +98,7 @@ static void	ft_get_trimmed_str(char *dest, const char *s1,
 	j = size - 1;
 	while (i > last_left_position)
 	{
-		if (!find_char_in_set(*(s1 + i), set))
+		if (!ft_find_char_in_set(*(s1 + i), set))
 			copy_from_right = 1;
 		if (copy_from_right)
 		{
@@ -113,6 +110,9 @@ static void	ft_get_trimmed_str(char *dest, const char *s1,
 	*(dest + size) = '\0';
 }
 
+/*
+ * Function: ft_strtrim
+ */
 char	*ft_strtrim(const char *s1, const char *set)
 {
 	int		size;
