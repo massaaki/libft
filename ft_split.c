@@ -13,10 +13,10 @@ char	*ft_treat_str(char *str, char c)
 	char *result;
 	char *result_temp;
 
-	result = (char *) malloc(ft_strlen(str) * sizeof(char) + 1);
+	//result = (char *) malloc(ft_strlen(str) * sizeof(char) + 1);
+	result = ft_calloc(ft_strlen(str) + 1, sizeof(char) );
 	result_temp = result;
 	str_temp = str;
-	printf("FT_TREAT_STR\n");
 	while(*str_temp != '\0')
 	{
 		
@@ -25,7 +25,7 @@ char	*ft_treat_str(char *str, char c)
 			found++;
 			str_temp++;
 		}
-		printf("%c", *(str_temp));
+	//	printf("%c", *(str_temp));
 
 
 		if(found > 0)
@@ -43,7 +43,6 @@ char	*ft_treat_str(char *str, char c)
 		str_temp++;
 	}
 	*(result_temp) = '\0';
-	printf("\nEND----\n");
 	return (result);
 }
 
@@ -72,21 +71,20 @@ void	ft_append_str(char **array, char *initial, char* final, int len, int pos)
 	int i;
 	current = initial;
 
-	printf("----------\n");
-	printf("len..: %d\n", len);
+	//printf("----------\n");
+	//printf("len..: %d\n", len);
 	array[pos] = (char *)malloc(len * sizeof(char) + 1);
-	printf("str..: \"");
+	//printf("str..: \"");
 	i = 0;
 	while (current < final)
 	{
-		printf("%c", *current);
+	//	printf("%c", *current);
 		array[pos][i] = *current;
 		current++;
 		i++;
 	}
-	printf("\"\n");
-	array[pos][i] = '\0';
-	printf("----------\n");
+	//array[pos][i] = '\0';
+	//printf("----------\n");
 }
 
 char	**ft_split(const char *s, char c)
@@ -96,35 +94,40 @@ char	**ft_split(const char *s, char c)
 	char *current_pos;
 	char *str;
 	char *treated_str;
+	char *treated_str_current;
 	int len;
 	char *set;
 	int array_index;
-	
-	set = (char *)malloc(sizeof(char) * 1 + 1);
+	//printf("%s\n", s);	
+	//set = (char *)malloc(sizeof(char) * 1);
+	set = ft_calloc(2, sizeof(char));
 	*set = c;
 	*(set + 1) = '\0';
 
 	str = ft_strtrim((char *)s, set);
 	treated_str = ft_treat_str(str, c);
-	array = (char **)malloc(ft_count_char(str, *(set)) * sizeof(char *));
-	initial_pos = treated_str;
+	treated_str_current = treated_str;
+
+	
+	array = (char **)malloc(ft_count_char(str, *(set)) * sizeof(char *) + 1);
+	initial_pos = treated_str_current;
 	current_pos = initial_pos;
 	array_index = 0;
 
-	printf("TREATED_STR..: %s\n\n", treated_str);
-	len = -1;
+	//printf("\nTREATED_STR..: %s\n\n", treated_str);
+	
 	//printf("split_count..: %d\n", ft_count_char(str, *(set)));
 	//printf("treated string..: \"%s\"\n", treated_str);
 	//printf("initial_pos..: %p %c\n", initial_pos, *initial_pos);
 	//printf("current_pos..: %p %c\n", current_pos, *current_pos);
 	
 
-	/*
-	while (*treated_str)
+		
+	while (*treated_str_current)
 	{
-		if (*treated_str == c)
+		if (*treated_str_current == c)
 		{
-			current_pos = treated_str;
+			current_pos = treated_str_current;
 			len = current_pos - initial_pos;
 
 			ft_append_str(array, initial_pos, current_pos, len, array_index);
@@ -134,19 +137,22 @@ char	**ft_split(const char *s, char c)
 		}
 
 		current_pos++;
-		treated_str++;
+		treated_str_current++;
 	}
 	if (initial_pos != current_pos)
 	{
-		len = current_pos - initial_pos - 1;
+		len = current_pos - initial_pos -1;
 		ft_append_str(array, initial_pos, current_pos, len, array_index);
 		array_index++;
 	}
-	*/
+	array[array_index] = NULL;
 	//printf("initial char..: %c\n", *initial_pos);
 	//printf("last char..: %c\n", *current_pos);
 	//printf("\n");
 	free(set);
-	//free(treated_str);
+	free(treated_str); 
+
+	free(str);
 	return (array);
+	return NULL;
 }
