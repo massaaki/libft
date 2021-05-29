@@ -6,7 +6,7 @@
 /*   By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 22:26:20 by mmassaak          #+#    #+#             */
-/*   Updated: 2021/05/29 19:08:06 by mmassaak         ###   ########.fr       */
+/*   Updated: 2021/05/29 20:34:57 by mmassaak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(const char *s1, const char *set);
 char	**ft_split(const char *s1, char c);
 char	*ft_itoa(int n);
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 #endif
