@@ -6,7 +6,7 @@
 /*   By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 22:26:20 by mmassaak          #+#    #+#             */
-/*   Updated: 2021/05/30 21:24:34 by mmassaak         ###   ########.fr       */
+/*   Updated: 2021/05/30 21:30:48 by mmassaak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_list *ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new_lst);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 
 #endif
