@@ -2,9 +2,7 @@
 
 int	ft_isalnum(int c)
 {
-	if (((unsigned char)c >= 'a' && (unsigned char)c <= 'z')
-		|| ((unsigned char)c >= 'A' && (unsigned char)c <= 'Z')
-		|| ((unsigned char)c >= '0' && (unsigned char)c <= '9'))
+	if (ft_isdigit(c) != 0 || ft_isalpha(c) != 0)
 		return (1);
 	return (0);
 }
