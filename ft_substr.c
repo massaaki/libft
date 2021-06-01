@@ -40,9 +40,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*dest;
 	size_t	s_len;
 
-	s_len = ft_strlen(s);
 	if (s == NULL)
 		return (NULL);
+	s_len = ft_strlen(s);
 	if (s_len < (size_t)start)
 	{
 		dest = (char *)malloc(sizeof(char));

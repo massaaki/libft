@@ -32,6 +32,8 @@ char	*ft_itoa(int n)
 	if (n == 0)
 	{
 		result = (char *)malloc(2 * sizeof(char));
+		if (!result)
+			return (NULL);
 		result[0] = '0';
 		result[1] = '\0';
 		return result;
@@ -41,12 +43,16 @@ char	*ft_itoa(int n)
 		len += 1;
 		num = (n * -1);
 		result = (char *)malloc((len + 1) * sizeof(char));
+		if (!result)
+			return (NULL);
 		result[0] = '-';
 	}
 	else 
 	{
 		num = n;
 		result = (char *)malloc((len + 1) * sizeof(char));
+		if (!result)
+			return (NULL);
 	}
 
 	result[len] = '\0';
