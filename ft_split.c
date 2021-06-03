@@ -101,7 +101,7 @@ char	**ft_split(const char *s, char c)
 	int		array_index;
 	void 	*check;
 
-	if (s == NULL || !c)
+	if (s == NULL )
 	{
 		array = (char **)malloc(sizeof(char *));
 		if(!array)
