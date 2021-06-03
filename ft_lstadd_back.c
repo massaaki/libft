@@ -1,7 +1,8 @@
 #include "libft.h"
-
+#include <stdio.h>
 void ft_lstadd_back(t_list **lst, t_list *new_lst)
 {
+
 	t_list	*current;
 	
 	if(!lst || !new_lst)
@@ -13,6 +14,5 @@ void ft_lstadd_back(t_list **lst, t_list *new_lst)
 	{
 		current = ft_lstlast(*lst);
 		current->next = new_lst;
-		new_lst->next = NULL;
 	}
 }
