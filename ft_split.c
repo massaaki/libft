@@ -1,6 +1,9 @@
 #include "libft.h"
 #include <stdio.h>
 
+
+
+
 /*
  * remove c duplicated in sequence
  */
@@ -170,3 +173,4 @@ char	**ft_split(const char *s, char c)
 
 	return (array);
 }
+
