@@ -1,14 +1,13 @@
 #include "libft.h"
-#include <stdio.h>
-void ft_lstadd_back(t_list **lst, t_list *new_lst)
-{
 
+void	ft_lstadd_back(t_list **lst, t_list *new_lst)
+{
 	t_list	*current;
-	
-	if(!lst || !new_lst)
-		return;
+
+	if (!lst || !new_lst)
+		return ;
 	current = *lst;
-	if(current == NULL)
+	if (current == NULL)
 		*lst = new_lst;
 	else
 	{
