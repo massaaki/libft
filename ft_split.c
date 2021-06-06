@@ -92,7 +92,7 @@ char	**ft_split(const char *s, char c)
 	char	**array;
 	char	*str_treated;
 	size_t	qty_str;
-	void	*result;
+	void	*check;
 
 	if (!s)
 		return (NULL);
@@ -104,10 +104,10 @@ char	**ft_split(const char *s, char c)
 	ft_remove_duplicated(str_treated, ft_trimmed_split_str(s, c), c);
 	qty_str = ft_count_str(str_treated, c);
 	array = (char **)malloc(qty_str * sizeof(char *) + 1);
-	result = ft_get_splited_str(array, str_treated, c);
-	if (result == NULL)
+	check = ft_get_splited_str(array, str_treated, c);
+	if (check == NULL)
 		return (NULL);
 	free(str_treated);
-	free(result);
+	free(check);
 	return (array);
 }
