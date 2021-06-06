@@ -1,176 +1,113 @@
 #include "libft.h"
-#include <stdio.h>
 
-
-
-
-/*
- * remove c duplicated in sequence
- */
-char	*ft_treat_str(char *str, char c)
+void	ft_remove_duplicated(char *treated_str, char *s, char c)
 {
+	char	*current;
 	int		found;
-	char	*str_temp;
-	char	*result;
-	char	*result_temp;
+	char	*treated_str_ptr;
 
+	current = (char *)s;
+	treated_str_ptr = treated_str;
 	found = 0;
-	result = ft_calloc(ft_strlen(str) + 1, sizeof(char));
-	if(!result)
-		return (NULL);
-	result_temp = result;
-	str_temp = str;
-	while (*str_temp != '\0')
+	while (*current)
 	{
-		while (*str_temp == c && *str_temp)
+		while (*current == c)
 		{
-			found++;
-			str_temp++;
+			found = 1;
+			current++;
 		}
-		if (found > 0)
+		if (found)
 		{
-			*result_temp = c;
-			result_temp++;
-			found = 0;
+			*treated_str_ptr = c;
+			treated_str_ptr++;
 		}
-		*result_temp = *str_temp;
-		result_temp++;
-		str_temp++;
+		*treated_str_ptr = *current;
+		treated_str_ptr++;
+		current ++;
+		found = 0;
 	}
-	*(result_temp) = '\0';
+	*treated_str_ptr = '\0';
+}
+
+char	*ft_trimmed_split_str(const char *s, char c)
+{
+	char	*set;
+	char	*result;
+
+	set = (char *)malloc(sizeof(char) * 1);
+	set[0] = c;
+	set[1] = '\0';
+	result = ft_strtrim(s, set);
+	free(set);
 	return (result);
 }
 
-int	ft_count_char(char *str, char c)
+size_t	ft_count_str(char *treated_str, char c)
 {
-	char	*str_temp;
-	int		count;
+	char	*treated_str_ptr;
+	size_t	count;
 
+	treated_str_ptr = treated_str;
 	count = 0;
-	str_temp = str;
-	while (*str_temp)
+	while (*treated_str_ptr)
 	{
-		if (*str_temp == c)
+		if (*treated_str_ptr == c)
 			count++;
-		str_temp++;
+		treated_str_ptr++;
 	}
-	if (*str_temp != '\0')
+	if (*(treated_str_ptr - 1) != c)
 		count++;
-	return (count + 1);
+	return (count);
 }
 
-void	*ft_append_str(char **array, char *initial, char *final, int pos)
+void	*ft_get_splited_str(char **array, char *treated_str, char c)
 {
-	char			*current;
-	int				i;
-	unsigned int	len;
+	char	*initial;
+	size_t	pos;
+	size_t	len;
 
-	//printf("initial: %c | final: %c\n", *initial, *(final-1));
-	if (*(final + 1) == '\0')
-		len = final - initial - 1;
-	else
-		len = final - initial;
-	current = initial;
-	//printf("len..: %u\n", len);
-	//printf("pos..: %d\n", pos);
-	array[pos] = (char *)malloc(len * sizeof(char) + 1);
-	if(!array[pos])
-		return (NULL);
-	i = 0;
-	//printf("cadastrando...:");
-	while (current < final)
+	initial = treated_str;
+	pos = 0;
+	len = ft_strlen(treated_str) + 1;
+	while (len--)
 	{
-		array[pos][i] = *current;
-		//printf("%c", *current);
-		current++;
-		i++;
+		if (*treated_str == c || *treated_str == '\0')
+		{
+			array[pos] = (char *)malloc((treated_str - initial + 1));
+			if (!array[pos])
+				return (NULL);
+			array[pos][0] = '\0';
+			ft_strlcat(array[pos], initial, (treated_str - initial + 1));
+			pos++;
+			initial = treated_str + 1;
+		}
+		treated_str++;
 	}
-	//printf("\n");
-	array[pos][i] = '\0';
-	//printf("array[%d]..: \"%s\"\n", pos, array[pos]);
-	//printf("initial: %c | final: %c\n", *initial, *(final-1));
+	array[pos] = NULL;
 	return (array);
 }
 
 char	**ft_split(const char *s, char c)
 {
 	char	**array;
-	char	*initial_pos;
-	char	*current_pos;
-	char	*str;
-	char	*treated_str;
-	char	*treated_str_current;
-	char	*set;
-	int		array_index;
-	void 	*check;
+	char	*str_treated;
+	size_t	qty_str;
+	void	*result;
 
-	if (s == NULL )
-	{
-		array = (char **)malloc(sizeof(char *));
-		if(!array)
-			return (NULL);
-		*array = NULL;
-		return array;
-	}
-
-	set = ft_calloc(2, sizeof(char));
-	if(!set)
+	if (!s)
 		return (NULL);
-	*set = c;
-	*(set + 1) = '\0';
-	str = ft_strtrim((char *)s, set);
-	treated_str = ft_treat_str(str, c);
-	if(!treated_str)
+	qty_str = 0;
+	str_treated = (char *)malloc(ft_strlen(s) * sizeof(char));
+	if (!str_treated)
 		return (NULL);
-	treated_str_current = treated_str;
-
-	//printf("treated string..: \"%s\"\n", treated_str);
-	//printf("qty array..: %lu\n", ft_count_char(treated_str, *(set)) * sizeof(char));
-	array = (char **)malloc(ft_count_char(treated_str, *(set)) * sizeof(char *) + 1);
-	if(!array)
+	str_treated[0] = '\0';
+	ft_remove_duplicated(str_treated, ft_trimmed_split_str(s, c), c);
+	qty_str = ft_count_str(str_treated, c);
+	array = (char **)malloc(qty_str * sizeof(char *) + 1);
+	result = ft_get_splited_str(array, str_treated, c);
+	if (result == NULL)
 		return (NULL);
-
-	initial_pos = treated_str_current;
-	current_pos = initial_pos;
-	array_index = 0;
-	while (*treated_str_current)
-	{
-		//printf("current..: %c\n", *treated_str_current);
-		if (*treated_str_current == c)
-		{
-			check = current_pos = treated_str_current;
-			if(!check)
-			{
-				free(array);
-				return (NULL);
-			}
-			ft_append_str(array, initial_pos, current_pos, array_index);
-			
-
-			//printf("appended[%d]..: %s\n",array_index, array[array_index]);
-			
-			current_pos++;
-			initial_pos = current_pos;
-			array_index++;
-			//printf("=====================\n");
-		}
-		current_pos++;
-		treated_str_current++;
-	}
-	if (initial_pos != current_pos)
-	{
-		ft_append_str(array, initial_pos, current_pos, array_index);
-		array_index++;
-	}
-
-	array[array_index] = NULL;
-	//printf("Last[%d]..: %s\n",array_index,  array[array_index]);
-	free(set);
-	free(treated_str);
-	free(str);
-
-	//printf("FIRST..: \"%s\"", array[0]);
-
+	free(str_treated);
+	free(result);
 	return (array);
 }
-
