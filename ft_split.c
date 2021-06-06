@@ -1,22 +1,20 @@
 #include "libft.h"
-#include <stdio.h>
 
 void	*ft_remove_duplicated(char *treated_str, char *s, char c)
 {
 	int		found;
 	char	*treated_str_ptr;
+	char	*initial;
 
 	if (!s)
 		return (NULL);
+	initial = s;
 	treated_str_ptr = treated_str;
 	found = 0;
 	while (*s)
 	{
-		while (*s == c)
-		{
+		while (*s == c && s++)
 			found = 1;
-			s++;
-		}
 		if (found)
 		{
 			*treated_str_ptr = c;
@@ -27,23 +25,18 @@ void	*ft_remove_duplicated(char *treated_str, char *s, char c)
 		s++;
 		found = 0;
 	}
-	return (treated_str);
+	return (free(initial), treated_str);
 }
 
-char	*ft_trimmed_split_str(const char *s, char c)
+void	*ft_free_all(char **array)
 {
-	char	*set;
-	char	*result;
+	size_t	pos;
 
-	set = ft_calloc(2, sizeof(char));
-	if (!set)
-		return (NULL);
-	set[0] = c;
-	result = ft_strtrim(s, set);
-	if (!result)
-		return (NULL);
-	free(set);
-	return (result);
+	pos = 0;
+	while (array[pos])
+		free(array[pos++]);
+	free(array);
+	return (NULL);
 }
 
 size_t	ft_count_str(char *treated_str, char c)
@@ -74,23 +67,18 @@ void	*ft_get_splited_str(char **array, char *treated_str, char c)
 	len = ft_strlen(treated_str) + 1;
 	if (treated_str[0] == '\0')
 		return (array);
-	initial = treated_str--;
+	initial = treated_str;
 	while (len--)
 	{
-		if (*++treated_str == c || *treated_str == '\0')
+		if (*treated_str == c || *treated_str == '\0')
 		{
 			array[pos] = ft_calloc((treated_str - initial + 1), sizeof(char));
 			if (!array[pos])
-			{
-				pos = 0;
-				while (array[pos])
-					free(array[pos++]);
-				free(array);
-				return (NULL);
-			}
+				return (ft_free_all(array));
 			ft_strlcat(array[pos++], initial, (treated_str - initial + 1));
 			initial = treated_str + 1;
 		}
+		treated_str++;
 	}
 	return (array);
 }
@@ -100,7 +88,6 @@ char	**ft_split(const char *s, char c)
 	char	**array;
 	char	*str_treated;
 	size_t	qty_str;
-	void	*check;
 	char	set[2];
 
 	set[0] = c;
@@ -111,27 +98,14 @@ char	**ft_split(const char *s, char c)
 	str_treated = ft_calloc(ft_strlen(s) + 1, sizeof(char));
 	if (!str_treated)
 		return (NULL);
-	//check = ft_remove_duplicated(str_treated, ft_trimmed_split_str(s, c), c);
-	check = ft_remove_duplicated(str_treated, ft_strtrim(s, set), c);
-	
-	if (check == NULL)
-	{
-		free(str_treated);
-		return (NULL);
-	}
+	if (!ft_remove_duplicated(str_treated, ft_strtrim(s, set), c))
+		return (free(str_treated), NULL);
 	qty_str = ft_count_str(str_treated, c);
 	array = ft_calloc(qty_str + 1, sizeof(char *));
 	if (!array)
-	{
-		free(str_treated);
-		return (NULL);
-	}
-	check = ft_get_splited_str(array, str_treated, c);
-	if (check == NULL)
-	{
-		free(str_treated);
-		return (NULL);
-	}
+		return (free(str_treated), NULL);
+	if (!ft_get_splited_str(array, str_treated, c))
+		return (free(str_treated), NULL);
 	free(str_treated);
 	return (array);
 }
