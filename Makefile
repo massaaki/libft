@@ -6,7 +6,7 @@
 #    By: mmassaak <mmassaak@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 22:39:04 by mmassaak          #+#    #+#              #
-#    Updated: 2021/05/30 21:53:23 by mmassaak         ###   ########.fr        #
+#    Updated: 2021/06/06 00:23:24 by mmassaak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): *.c
-	gcc $(FLAGS) -c $(SRC)
+	#gcc $(FLAGS) -c $(SRC) -fsanitize=address -g
+	gcc $(FLAGS) -c $(SRC) 
 	ar rc $(NAME) $(OUT_FILES)
 	ranlib $(NAME)
 
