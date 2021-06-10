@@ -18,7 +18,6 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(SRC_OBJECTS)
-	#gcc $(FLAGS) -c $(SRC) -fsanitize=address -g
 	ar -rcs $(NAME) $(SRC_OBJECTS)
 
 $(SRC_OBJECTS): $(SRC)
