@@ -18,13 +18,13 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(SRC_OBJECTS)
-	ar -rcs $(NAME) $(SRC_OBJECTS)
+	ar rcs $(NAME) $(SRC_OBJECTS)
 
 $(SRC_OBJECTS): $(SRC)
 	gcc $(FLAGS) -c $(SRC) 
 
 bonus: $(BONUS_OBJECTS)
-	ar -rcs $(NAME) $(BONUS_OBJECTS)
+	ar rcs $(NAME) $(BONUS_OBJECTS)
 
 $(BONUS_OBJECTS): $(BONUS)
 	gcc $(FLAGS) -c $(BONUS)
@@ -36,8 +36,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-test:
-	make m -C ./libft_tests
 
 .PHONY: all clean fclean re
