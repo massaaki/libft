@@ -15,7 +15,8 @@ static char	*ft_substr_allocate(char const *s, unsigned int start, size_t len)
 	return (dest);
 }
 
-static void	ft_substrcpy(char const *s, unsigned int start, size_t len, char *dest)
+static void	ft_substrcpy(char const *s, unsigned int start,
+		size_t len, char *dest)
 {
 	size_t	i;
 	size_t	j;
