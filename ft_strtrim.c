@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int	ft_char_is_in_set(char c, const char *set)
+static int	ft_char_is_in_set(char c, const char *set)
 {
 	char	*set_ptr;
 
@@ -14,7 +14,7 @@ int	ft_char_is_in_set(char c, const char *set)
 	return (0);
 }
 
-void	*ft_get_initial(const char *s1, const char *set)
+static void	*ft_get_initial(const char *s1, const char *set)
 {
 	char	*s1_ptr;
 
@@ -24,7 +24,7 @@ void	*ft_get_initial(const char *s1, const char *set)
 	return (s1_ptr);
 }
 
-void	*ft_get_final(const char *s1, const char *set)
+static void	*ft_get_final(const char *s1, const char *set)
 {
 	size_t	len;
 	char	*s1_ptr;

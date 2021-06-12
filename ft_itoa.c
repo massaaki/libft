@@ -20,7 +20,7 @@ static int	ft_get_decimal(int n)
 	return (count);
 }
 
-char	*ft_alloc_mem(unsigned int *num, int n, int *len)
+static char	*ft_alloc_mem(unsigned int *num, int n, int *len)
 {
 	char	*result;
 
@@ -44,7 +44,7 @@ char	*ft_alloc_mem(unsigned int *num, int n, int *len)
 	return (result);
 }
 
-char	*ft_alloc_zero(void)
+static char	*ft_alloc_zero(void)
 {
 	char	*result;
 

@@ -2,7 +2,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int			i;
+	size_t			i;
 	char		*ptr_s;
 
 	ptr_s = (char *)s;

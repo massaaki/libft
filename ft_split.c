@@ -1,6 +1,6 @@
 #include "libft.h"
 
-void	*ft_remove_duplicated(char *treated_str, char *s, char c)
+static void	*ft_remove_duplicated(char *treated_str, char *s, char c)
 {
 	int		found;
 	char	*treated_str_ptr;
@@ -28,7 +28,7 @@ void	*ft_remove_duplicated(char *treated_str, char *s, char c)
 	return (free(initial), treated_str);
 }
 
-void	*ft_free_all(char **array)
+static void	*ft_free_all(char **array)
 {
 	size_t	pos;
 
@@ -57,7 +57,7 @@ size_t	ft_count_str(char *treated_str, char c)
 	return (count);
 }
 
-void	*ft_get_splited_str(char **array, char *treated_str, char c)
+static void	*ft_get_splited_str(char **array, char *treated_str, char c)
 {
 	char	*initial;
 	size_t	pos;
