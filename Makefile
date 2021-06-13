@@ -7,33 +7,34 @@ SRC = ft_strlen.c ft_bzero.c ft_memset.c ft_memcpy.c \
 	  ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
 	  ft_itoa.c ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c \
 	  ft_putendl_fd.c ft_putnbr_fd.c
-SRC_OBJECTS = $(SRC:.c=.o)# substitute .c to .o to all SRC
+SRC_OBJECTS = $(SRC:.c=.o)
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 	  ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 	  ft_lstmap.c
 BONUS_OBJECTS = $(BONUS:.c=.o)
 NAME = libft.a
 FLAGS = -Wall -Werror -Wextra
+RM = rm -rf
+CC = gcc
+LIBFLAGS = rcs
+MAKELIB = ar ${LIBFLAGS}
 
-all: $(NAME)
+all: ${NAME}
 
-$(NAME): $(SRC_OBJECTS)
-	ar rcs $(NAME) $(SRC_OBJECTS)
+${NAME}: ${SRC_OBJECTS}
+	${MAKELIB} ${NAME} ${SRC_OBJECTS}
 
-$(SRC_OBJECTS): $(SRC)
-	gcc $(FLAGS) -c $(SRC) 
-
-bonus: $(BONUS_OBJECTS)
-	ar rcs $(NAME) $(BONUS_OBJECTS)
-
-$(BONUS_OBJECTS): $(BONUS)
-	gcc $(FLAGS) -c $(BONUS)
+%.o: %.c
+	${CC} ${FLAGS} -c $< -o $@ 
+	
+bonus: ${BONUS_OBJECTS} ${NAME}
+	${MAKELIB} ${NAME} ${BONUS_OBJECTS}
 
 clean:
-	$(RM) $(SRC_OBJECTS) $(BONUS_OBJECTS)
+	${RM} ${SRC_OBJECTS} ${BONUS_OBJECTS}
 
 fclean: clean
-	$(RM) $(NAME)
+	${RM} ${NAME}
 
 re: fclean all
 
