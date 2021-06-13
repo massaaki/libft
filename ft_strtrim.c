@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <stdio.h>
 
 static int	ft_char_is_in_set(char c, const char *set)
 {
@@ -55,7 +56,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	if (!dest)
 		return (NULL);
 	dest[0] = '\0';
-	if (len_to_cpy > 1)
+	if (len_to_cpy >= 1)
 		ft_strlcat(dest, initial_str, len_to_cpy + 1);
 	return (dest);
 }
