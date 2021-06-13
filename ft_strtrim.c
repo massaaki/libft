@@ -1,5 +1,4 @@
 #include "libft.h"
-#include <stdio.h>
 
 static int	ft_char_is_in_set(char c, const char *set)
 {
